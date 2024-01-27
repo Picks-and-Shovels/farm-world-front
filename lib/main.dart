@@ -1,7 +1,13 @@
+import 'package:farmworld_2/community.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
+
 import 'package:farmworld_2/community/general.dart';
 import 'package:farmworld_2/community/QnA.dart';
 import './listItem.dart';
+import 'community.dart';
+import 'addCommunity.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,6 +18,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<Database> database = initDatabase();
+
     return MaterialApp(
       title: 'Community',
       theme: ThemeData(
@@ -20,8 +28,23 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const FirstPage(),
-        '/second': (context) => const SecondPage()
+        '/second': (context) => const SecondPage(),
+        '/data':(context) => DatabaseApp(database),
+        '/add': (context) => AddCommunityApp(database)
       },
+    );
+  }
+
+  Future<Database> initDatabase() async {
+    return openDatabase(
+      join(await getDatabasesPath(), 'community_database.db'),
+      onCreate: (db, version) {
+        return db.execute(
+          "CREATE TABLE communities(id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            "title TEXT, context TEXT, name TEXT)",
+        );
+      },
+      version: 1,
     );
   }
 }
@@ -108,4 +131,98 @@ class SecondPage extends StatelessWidget {
     );
   }
 }
+
+class DatabaseApp extends StatefulWidget {
+  final Future<Database> db;
+  const DatabaseApp(this.db, {super.key});
+
+  const DatabaseApp({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _DatabaseApp();
+}
+
+class _DatabaseApp extends State<DatabaseApp> {
+  Future<List<Community>>? communityList;
+
+  @override
+  void initState() {
+    super.initState();
+    communityList = getCommunity();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Database Example'),),
+      body: Container(
+        child: Center(
+          child: FutureBuilder(
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                  return const CircularProgressIndicator();
+                case ConnectionState.waiting:
+                  return const CircularProgressIndicator();
+                case ConnectionState.active:
+                  return const CircularProgressIndicator();
+                case ConnectionState.done:
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                      itemBuilder: (context, index) {
+                        Community community = (snapshot.data as List<Community>)[index];
+                        return Card(
+                          child: Column(
+                            children: <Widget>[
+                              Text(community.title!),
+                              Text(community.content!),
+                            ],
+                          ),
+                        );
+                      },
+                      itemCount: (snapshot.data as List<Community>).length,
+                    );
+                  } else {
+                    return const Text('No data');
+                  }
+              }
+              return const CircularProgressIndicator();
+              },
+              future: communityList,
+          ),
+          ),
+        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          final community = await Navigator.of(context).pushNamed('/add');
+          if (community != null) {
+            _insertCommunity(community as Community);
+          }
+        },
+        child: const Icon(Icons.add),),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      );
+  }
+
+  void _insertCommunity(Community community) async {
+    final Database database = await widget.db;
+    await database.insert('communities', community.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace);
+    setState(() {
+      communityList = getCommunity();
+    });
+  }
+
+  Future<List<Community>> getCommunity() async {
+    final Database database = await widget.db;
+    final List<Map<String, dynamic>> maps = await database.query('communities');
+
+    return List.generate(maps.length, (i) {
+      return Community(
+        title: maps[i]['title'].toString(),
+        content: maps[i]['content'].toString(),
+        id: maps[i]['id']);
+  });
+    }
+  }
 
