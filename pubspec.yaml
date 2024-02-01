@@ -30,8 +30,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  sqflite: ^2.0.0+3
+  sqflite: ^2.2.8
   path: ^1.8.0
+  mysql_client: ^0.0.27
+  shared_preferences: ^2.2.2
+  provider: ^6.0.5
 
 
   # The following adds the Cupertino Icons font to your application.
