@@ -49,7 +49,7 @@ class PostState extends State<PostPage> {
     }
 
     print('MemoMainPage - getMemoList : $postList');
-    context.read<PostUpdator>().updateList(postList);
+    // context.read<PostUpdator>().updateList(postList);
   }
 
   @override
