@@ -12,6 +12,7 @@ import 'package:farmworld_community/community/postMainPage.dart';
 import 'package:farmworld_community/config/mySqlConnector.dart';
 import 'package:farmworld_community/community/postListProvider.dart';
 import 'package:farmworld_community/community/communityDB.dart';
+import 'package:farmworld_community/community/postDetailPage.dart';
 
 class CommunityPage extends StatelessWidget {
   const CommunityPage({super.key});
@@ -202,5 +203,8 @@ Future<void> addItemEvent(BuildContext context) {
       );
     },
   );
+  class ScrapPage extends StatelessWidget {
+    // 스크랩된 게시물 표시 화면
+  }
 }
 

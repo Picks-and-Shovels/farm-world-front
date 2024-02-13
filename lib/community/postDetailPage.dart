@@ -19,6 +19,13 @@ class ContentPage extends StatefulWidget {
 }
 
 class _ContentState extends State<ContentPage> {
+
+  // 좋아요 기능
+  bool isLiked = false;
+
+  // 스크랩 기능
+  bool isScrap = false;
+
   // 부모에게서 받은 생성자 값 초기화
   final dynamic content;
   _ContentState({required this.content});
@@ -90,6 +97,23 @@ class _ContentState extends State<ContentPage> {
                 });
               },
             ),
+            IconButton(
+              icon: isLiked ? Icon(Icons.favorite) : Icon(Icons.favorite_border),
+              color: isLiked ? Colors.black : null,
+              onPressed: () {
+                setState(() {
+                  isLiked = !isLiked;
+                });
+              },
+            ),
+            IconButton(
+              icon: isScrap ? Icon(Icons.bookmark_sharp) : Icon(Icons.bookmark_outline_sharp),
+              color: isScrap ? Colors.black : null,
+              onPressed: () {
+                setState(() {
+                  isScrap = !isScrap;
+                });
+              }),
           ],
         );
       },
