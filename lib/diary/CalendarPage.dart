@@ -21,7 +21,7 @@ class MainCalendar extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => DiarySheet(selectedDate: selectedDate),
+            builder: (_) => DiaryPage(selectedDate: selectedDate),
           ),
         );
       },

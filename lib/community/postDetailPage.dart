@@ -156,7 +156,6 @@ class _ContentState extends State<ContentPage> {
 
   @override
   void initState() {
-    // (구현 필요)
     super.initState();
     var post = {
       'id': content['id'],

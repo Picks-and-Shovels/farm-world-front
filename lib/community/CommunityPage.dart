@@ -203,8 +203,6 @@ Future<void> addItemEvent(BuildContext context) {
       );
     },
   );
-  class ScrapPage extends StatelessWidget {
-    // 스크랩된 게시물 표시 화면
-  }
+
 }
 
