@@ -9,8 +9,8 @@ import 'package:mysql_client/mysql_client.dart';
 import 'package:provider/provider.dart';
 
 import 'package:farmworld_community/config/mySqlConnector.dart';
-import 'package:farmworld_community/community/postListProvider.dart';
-import 'package:farmworld_community/community/communityDB.dart';
+import 'package:farmworld_community/community/models/postListProvider.dart';
+import 'package:farmworld_community/community/models/communityDB.dart';
 
 void main() {
   dbConnector();

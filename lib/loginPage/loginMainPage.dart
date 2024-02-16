@@ -172,7 +172,7 @@ class _LoginState extends State<LoginPage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SizedBox(
-                    width: 250,
+                    width: 200,
                     child: ElevatedButton(
                       onPressed: () async {
                         final loginCheck = await login(
@@ -218,7 +218,7 @@ class _LoginState extends State<LoginPage> {
                           );
                         }
                       },
-                      child: Text('로그인'),
+                      child: Text('Log In'),
                     ),
                   ),
                 ),

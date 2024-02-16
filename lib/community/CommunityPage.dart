@@ -1,4 +1,4 @@
-// 게시판의 main
+// 게시판 메인 페이지
 
 import 'package:farmworld_community/config/mySqlConnector.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +10,8 @@ import 'package:provider/provider.dart';
 import 'package:farmworld_community/community/QnAMainPage.dart';
 import 'package:farmworld_community/community/postMainPage.dart';
 import 'package:farmworld_community/config/mySqlConnector.dart';
-import 'package:farmworld_community/community/postListProvider.dart';
-import 'package:farmworld_community/community/communityDB.dart';
+import 'package:farmworld_community/community/models/postListProvider.dart';
+import 'package:farmworld_community/community/models/communityDB.dart';
 import 'package:farmworld_community/community/postDetailPage.dart';
 
 class CommunityPage extends StatelessWidget {

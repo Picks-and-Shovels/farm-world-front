@@ -1,3 +1,6 @@
+// 일지 작성 페이지
+// 달력 페이지의 날짜를 클릭하면 해당 페이지로 이동
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';

@@ -3,8 +3,8 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:farmworld_community/community/communityDB.dart';
-import 'package:farmworld_community/community/postListProvider.dart';
+import 'package:farmworld_community/community/models/communityDB.dart';
+import 'package:farmworld_community/community/models/postListProvider.dart';
 import 'package:provider/provider.dart';
 
 import 'postDetailPage.dart';

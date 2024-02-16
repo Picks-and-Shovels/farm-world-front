@@ -4,8 +4,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:farmworld_community/community/communityDB.dart';
-import 'package:farmworld_community/community/postListProvider.dart';
+import 'package:farmworld_community/community/models/communityDB.dart';
+import 'package:farmworld_community/community/models/postListProvider.dart';
 import 'package:farmworld_community/community/postMainPage.dart';
 import 'package:provider/provider.dart';
 
